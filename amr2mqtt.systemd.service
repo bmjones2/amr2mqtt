@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStartPre=-/bin/sleep 120
+ExecStartPre=
 ExecStart=/opt/amr2mqtt/amr2mqtt
 StandardOutput=syslog
 StandardError=syslog

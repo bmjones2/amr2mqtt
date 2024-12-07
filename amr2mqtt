@@ -63,7 +63,7 @@ print("rtltcp started, waiting 4 seconds")
 
 # start the rtlamr program.
 rtlamr = subprocess.Popen([settings.RTLAMR,
-    '-msgtype=idm,scm,scm+',
+    '-msgtype=idm,scm,scm+,r900,r900bcd',
     '-format=json'], stdout=subprocess.PIPE)
 print("rtlamr started, waiting 4 seconds")
 time.sleep(4)
@@ -96,6 +96,14 @@ while True:
             parsedmessage = parsedjson["Message"]
             parsed_id = parsedmessage["ERTSerialNumber"]           
             type = "idm"
+        if parsedjson["Type"] == 'R900':
+            parsedmessage = parsedjson["Message"]
+            parsed_id = parsedmessage["ID"]
+            type = "r900"
+        if parsedjson["Type"] == 'R900BCD':
+            parsedmessage = parsedjson["Message"]
+            parsed_id = parsedmessage["ID"]
+            type = "r900bcd"
 
         # make sure the meter id is one we want
         meter_id = int(parsed_id)
